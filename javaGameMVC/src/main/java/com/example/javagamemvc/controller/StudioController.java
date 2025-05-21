@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/studios")
-@Tag(name = "Studio Controller", description = "Zarządzanie studiami")
+@Tag(name = "Studio Controller", description = "Endpoints for managing game studios")
 public class StudioController {
 
     private final StudioService studioService;
@@ -21,13 +21,13 @@ public class StudioController {
     }
 
     @GetMapping
-    @Operation(summary = "Pobierz wszystkie studia")
+    @Operation(summary = "Get all game studios")
     public ResponseEntity<List<Studio>> getAllStudios() {
         return ResponseEntity.ok(studioService.findAll());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Pobierz studio po ID")
+    @Operation(summary = "Get studio by ID")
     public ResponseEntity<Studio> getStudioById(@PathVariable Long id) {
         return studioService.findById(id)
                 .map(ResponseEntity::ok)
@@ -35,19 +35,19 @@ public class StudioController {
     }
 
     @PostMapping
-    @Operation(summary = "Dodaj nowe studio")
+    @Operation(summary = "Create new game studio")
     public ResponseEntity<Studio> createStudio(@RequestBody Studio studio) {
         return ResponseEntity.ok(studioService.save(studio));
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Zaktualizuj studio po ID")
+    @Operation(summary = "Update and existing studio by ID")
     public ResponseEntity<Studio> updateStudio(@PathVariable Long id, @RequestBody Studio updatedStudio) {
         return ResponseEntity.ok(studioService.update(id, updatedStudio));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Usuń studio po ID")
+    @Operation(summary = "Delete studio by ID")
     public ResponseEntity<Void> deleteStudio(@PathVariable Long id) {
         studioService.deleteById(id);
         return ResponseEntity.noContent().build();

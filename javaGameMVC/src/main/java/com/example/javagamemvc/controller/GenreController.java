@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/genres")
-@Tag(name = "Genre Controller", description = "Zarządzanie gatunkami gier")
+@Tag(name = "Genre Controller", description = "Endpoints for managing game genres")
 public class GenreController {
 
     private final GenreService genreService;
@@ -21,13 +21,13 @@ public class GenreController {
     }
 
     @GetMapping
-    @Operation(summary = "Pobierz wszystkie gatunki")
+    @Operation(summary = "Get all game genres")
     public ResponseEntity<List<Genre>> getAllGenres() {
         return ResponseEntity.ok(genreService.findAll());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Pobierz gatunek po ID")
+    @Operation(summary = "Get game genre by ID")
     public ResponseEntity<Genre> getGenreById(@PathVariable Long id) {
         return genreService.findById(id)
                 .map(ResponseEntity::ok)
@@ -35,19 +35,19 @@ public class GenreController {
     }
 
     @PostMapping
-    @Operation(summary = "Utwórz nowy gatunek")
+    @Operation(summary = "Create new genre")
     public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
         return ResponseEntity.ok(genreService.save(genre));
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Zaktualizuj istniejący gatunek")
+    @Operation(summary = "Update and existing genre")
     public ResponseEntity<Genre> updateGenre(@PathVariable Long id, @RequestBody Genre updatedGenre) {
         return ResponseEntity.ok(genreService.update(id, updatedGenre));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Usuń gatunek po ID")
+    @Operation(summary = "Delete genre by ID")
     public ResponseEntity<Void> deleteGenre(@PathVariable Long id) {
         genreService.deleteById(id);
         return ResponseEntity.noContent().build();
