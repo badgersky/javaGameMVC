@@ -25,4 +25,15 @@ public class Game {
 
     @ManyToMany(mappedBy = "liked_games")
     private Set<Users> liked_by_users = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "genre_game",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
+
+    @ManyToMany(mappedBy = "games")
+    private Set<Studio> studios = new HashSet<>();
 }
