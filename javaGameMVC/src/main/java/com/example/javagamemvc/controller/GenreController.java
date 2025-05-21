@@ -41,7 +41,7 @@ public class GenreController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update and existing genre")
+    @Operation(summary = "Update an existing genre")
     public ResponseEntity<Genre> updateGenre(@PathVariable Long id, @RequestBody Genre updatedGenre) {
         return ResponseEntity.ok(genreService.update(id, updatedGenre));
     }
