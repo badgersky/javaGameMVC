@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/studios")
-@Tag(name = "Studio Controller", description = "Operacje CRUD na encji Studio")
+@Tag(name = "Studio Controller", description = "Zarządzanie studiami")
 public class StudioController {
 
     private final StudioService studioService;
