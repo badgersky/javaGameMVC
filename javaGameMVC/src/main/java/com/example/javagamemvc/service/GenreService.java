@@ -23,15 +23,15 @@ public class GenreService {
         return genreRepository.findById(id);
     }
 
-    public Genre save(Genre accountType) {
-        return genreRepository.save(accountType);
+    public Genre save(Genre genre) {
+        return genreRepository.save(genre);
     }
 
-    public Genre update(Long id, Genre updatedAccountType) {
-        Genre accountType = genreRepository.findById(id)
+    public Genre update(Long id, Genre updatedGenre) {
+        Genre genre = genreRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("AccountType not found with id " + id));
-        accountType.setName(updatedAccountType.getName());
-        return genreRepository.save(accountType);
+        genre.setName(updatedGenre.getName());
+        return genreRepository.save(genre);
     }
 
     public void deleteById(Long id) {
