@@ -5,6 +5,7 @@ import com.example.javagamemvc.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
 
@@ -37,12 +40,16 @@ public class UserController {
     @PostMapping
     @Operation(summary = "Create new user")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
+        String rawPassword = user.getPassword();
+        user.setPassword(passwordEncoder.encode(rawPassword));
         return ResponseEntity.ok(userService.save(user));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing user")
     public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users updatedUser) {
+        String rawPassword = updatedUser.getPassword();
+        updatedUser.setPassword(passwordEncoder.encode(rawPassword));
         return ResponseEntity.ok(userService.update(id, updatedUser));
     }
 
