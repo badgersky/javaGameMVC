@@ -4,6 +4,7 @@ import com.example.javagamemvc.repository.UserRepository;
 import com.example.javagamemvc.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,10 +37,15 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/games", "/api/games/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/games/**").authenticated()
+                        .requestMatchers("/api/games/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/genres/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/studios/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/account-types/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
-                ).formLogin(form -> form
+                )
+                .formLogin(form -> form
                         .defaultSuccessUrl("/swagger-ui/index.html", true)
                 )
                 .logout(logout -> logout
@@ -51,4 +57,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
