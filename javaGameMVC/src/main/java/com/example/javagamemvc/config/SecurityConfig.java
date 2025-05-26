@@ -13,8 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 public class SecurityConfig {
 
@@ -41,8 +39,15 @@ public class SecurityConfig {
                         .requestMatchers("/api/games", "/api/games/**").permitAll()
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
+                ).formLogin(form -> form
+                        .defaultSuccessUrl("/swagger-ui/index.html", true)
                 )
-                .httpBasic(withDefaults());
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                );
 
         return http.build();
     }
