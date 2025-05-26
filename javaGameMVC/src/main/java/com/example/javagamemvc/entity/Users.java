@@ -19,6 +19,7 @@ public class Users {
     private Long id;
     private String username;
     private String email;
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "account_type_id", nullable = false)
