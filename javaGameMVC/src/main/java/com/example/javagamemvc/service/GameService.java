@@ -46,4 +46,8 @@ public class GameService {
     public void deleteById(Long id) {
         gameRepository.deleteById(id);
     }
+
+    public List<Game> findGamesByStudioId(Long studioId) {
+        return gameRepository.findByStudiosId(studioId);
+    }
 }

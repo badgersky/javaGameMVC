@@ -5,6 +5,7 @@ import com.example.javagamemvc.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +59,27 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/like/{gameId}")
+    @Operation(summary = "Like a game by the logged-in user")
+    public ResponseEntity<Users> likeGame(@PathVariable Long gameId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Users user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Users updatedUser = userService.likeGame(user.getId(), gameId);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PutMapping("/unlike/{gameId}")
+    @Operation(summary = "Dislike a game by the logged-in user")
+    public ResponseEntity<Users> unlikeGame(@PathVariable Long gameId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Users user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Users updatedUser = userService.unlikeGame(user.getId(), gameId);
+        return ResponseEntity.ok(updatedUser);
     }
 }
