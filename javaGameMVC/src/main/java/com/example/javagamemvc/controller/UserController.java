@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @PutMapping("/unlike/{gameId}")
-    @Operation(summary = "Remove like from a game by the logged-in user")
+    @Operation(summary = "Dislike a game by the logged-in user")
     public ResponseEntity<Users> unlikeGame(@PathVariable Long gameId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Users user = userService.findByUsername(username)

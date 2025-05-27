@@ -52,5 +52,12 @@ public class GameController {
         gameService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/studio/{studioId}")
+    @Operation(summary = "Get games by studio ID")
+    public ResponseEntity<List<Game>> getGamesByStudioId(@PathVariable Long studioId) {
+        List<Game> games = gameService.findGamesByStudioId(studioId);
+        return ResponseEntity.ok(games);
+    }
 }
 

@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/like/**", "/api/users/unlike/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/games/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/studios/**").authenticated()
                         .requestMatchers("/api/games/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/genres/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/studios/**").hasAuthority("ADMIN")

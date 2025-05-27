@@ -1,5 +1,6 @@
 package com.example.javagamemvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,6 @@ public class Game {
     private Set<Genre> genres = new HashSet<>();
 
     @ManyToMany(mappedBy = "games")
+    @JsonIgnore
     private Set<Studio> studios = new HashSet<>();
 }
