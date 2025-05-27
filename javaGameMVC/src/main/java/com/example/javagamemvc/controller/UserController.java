@@ -71,4 +71,15 @@ public class UserController {
         Users updatedUser = userService.likeGame(user.getId(), gameId);
         return ResponseEntity.ok(updatedUser);
     }
+
+    @PutMapping("/unlike/{gameId}")
+    @Operation(summary = "Remove like from a game by the logged-in user")
+    public ResponseEntity<Users> unlikeGame(@PathVariable Long gameId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Users user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Users updatedUser = userService.unlikeGame(user.getId(), gameId);
+        return ResponseEntity.ok(updatedUser);
+    }
 }

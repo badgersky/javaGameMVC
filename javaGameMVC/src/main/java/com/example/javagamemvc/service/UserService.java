@@ -52,7 +52,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Game not found"));
 
         if (user.getLiked_games().add(game)) {
-            game.setLike_number(game.getLiked_by_users().size() + 1); // lub += 1
+            game.setLike_number(game.getLiked_by_users().size() + 1);
             gameRepository.save(game);
             userRepository.save(user);
         }
@@ -62,6 +62,21 @@ public class UserService {
 
     public Optional<Users> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Users unlikeGame(Long userId, Long gameId) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+
+        if (user.getLiked_games().remove(game)) {
+            game.setLike_number(game.getLiked_by_users().size() - 1);
+            gameRepository.save(game);
+            userRepository.save(user);
+        }
+
+        return user;
     }
 }
 
