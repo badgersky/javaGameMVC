@@ -1,6 +1,8 @@
 package com.example.javagamemvc.service;
 
+import com.example.javagamemvc.entity.Game;
 import com.example.javagamemvc.entity.Users;
+import com.example.javagamemvc.repository.GameRepository;
 import com.example.javagamemvc.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,11 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final GameRepository gameRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, GameRepository gameRepository) {
         this.userRepository = userRepository;
+        this.gameRepository = gameRepository;
     }
 
     public List<Users> findAll() {
@@ -39,6 +43,25 @@ public class UserService {
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public Users likeGame(Long userId, Long gameId) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+
+        if (user.getLiked_games().add(game)) {
+            game.setLike_number(game.getLiked_by_users().size() + 1); // lub += 1
+            gameRepository.save(game);
+            userRepository.save(user);
+        }
+
+        return user;
+    }
+
+    public Optional<Users> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
 
