@@ -1,5 +1,6 @@
 package com.example.javagamemvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,7 @@ public class Studio {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "studio_game",
-            joinColumns = @JoinColumn(name = "studio_id"),
-            inverseJoinColumns = @JoinColumn(name = "game_id")
-    )
+    @ManyToMany(mappedBy = "studios")
+    @JsonIgnore
     private Set<Game> games = new HashSet<>();
 }
