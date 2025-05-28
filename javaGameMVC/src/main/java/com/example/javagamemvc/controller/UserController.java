@@ -5,6 +5,7 @@ import com.example.javagamemvc.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,14 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "Get all users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<Users>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get user by ID")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Users> getUserById(@PathVariable Long id) {
         return userService.findById(id)
                 .map(ResponseEntity::ok)
@@ -40,6 +43,7 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "Create new user")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         String rawPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(rawPassword));
@@ -48,6 +52,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing user")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users updatedUser) {
         String rawPassword = updatedUser.getPassword();
         updatedUser.setPassword(passwordEncoder.encode(rawPassword));
@@ -56,6 +61,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete user by ID")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
@@ -63,6 +69,7 @@ public class UserController {
 
     @PostMapping("/like/{gameId}")
     @Operation(summary = "Like a game by the logged-in user")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Users> likeGame(@PathVariable Long gameId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Users user = userService.findByUsername(username)
@@ -74,6 +81,7 @@ public class UserController {
 
     @PutMapping("/unlike/{gameId}")
     @Operation(summary = "Dislike a game by the logged-in user")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Users> unlikeGame(@PathVariable Long gameId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Users user = userService.findByUsername(username)

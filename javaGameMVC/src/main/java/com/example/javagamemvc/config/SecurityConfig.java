@@ -4,9 +4,9 @@ import com.example.javagamemvc.repository.UserRepository;
 import com.example.javagamemvc.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+@EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
 
@@ -37,14 +38,6 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/like/**", "/api/users/unlike/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/games/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/studios/**").authenticated()
-                        .requestMatchers("/api/games/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/genres/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/studios/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/account-types/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
