@@ -59,5 +59,12 @@ public class GameController {
         List<Game> games = gameService.findGamesByStudioId(studioId);
         return ResponseEntity.ok(games);
     }
+
+    @GetMapping("/genre/{genreId}")
+    @Operation(summary = "Get games by genre ID")
+    public ResponseEntity<List<Game>> getGamesByGenreId(@PathVariable Long genreId) {
+        List<Game> games = gameService.findGamesByGenreId(genreId);
+        return ResponseEntity.ok(games);
+    }
 }
 

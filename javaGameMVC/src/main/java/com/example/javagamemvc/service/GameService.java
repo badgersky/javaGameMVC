@@ -50,4 +50,8 @@ public class GameService {
     public List<Game> findGamesByStudioId(Long studioId) {
         return gameRepository.findByStudiosId(studioId);
     }
+
+    public List<Game> findGamesByGenreId(Long genreId) {
+        return gameRepository.findByGenresId(genreId);
+    }
 }
