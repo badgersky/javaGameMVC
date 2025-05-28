@@ -3,7 +3,7 @@ services:
     build: .
     ports:
       - "8080:8080"
-    container_name: springboot-app
+    container_name: gamesMVC
     depends_on:
       - db
     environment:
@@ -15,11 +15,11 @@ services:
 
   db:
     image: postgres:16
-    container_name: postgres-db
+    container_name: games-postgres-db
     environment:
-      POSTGRES_DB: task_manager
-      POSTGRES_USER: nomis
-      POSTGRES_PASSWORD: aa
+      POSTGRES_DB: gamesdb
+      POSTGRES_USER: gamemaster
+      POSTGRES_PASSWORD: crazydiamondo
     ports:
       - "5434:5432"
     volumes:
