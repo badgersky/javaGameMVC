@@ -36,7 +36,7 @@ class GameControllerTest {
 
         when(gameService.findAll()).thenReturn(Arrays.asList(game1, game2));
 
-        ResponseEntity<List<Game>> response = gameController.getAllGenres();
+        ResponseEntity<List<Game>> response = gameController.getAllGames();
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(2, response.getBody().size());
@@ -49,7 +49,7 @@ class GameControllerTest {
         game.setTitle("My Game");
         when(gameService.findById(1L)).thenReturn(Optional.of(game));
 
-        ResponseEntity<Game> response = gameController.getGenreById(1L);
+        ResponseEntity<Game> response = gameController.getGameById(1L);
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("My Game", response.getBody().getTitle());
@@ -59,7 +59,7 @@ class GameControllerTest {
     void testGetGameByIdNotFound() {
         when(gameService.findById(1L)).thenReturn(Optional.empty());
 
-        ResponseEntity<Game> response = gameController.getGenreById(1L);
+        ResponseEntity<Game> response = gameController.getGameById(1L);
 
         assertEquals(404, response.getStatusCodeValue());
         assertNull(response.getBody());
@@ -87,7 +87,7 @@ class GameControllerTest {
 
         when(gameService.update(eq(1L), any(Game.class))).thenReturn(updatedGame);
 
-        ResponseEntity<Game> response = gameController.updateGenre(1L, updatedGame);
+        ResponseEntity<Game> response = gameController.updateGame(1L, updatedGame);
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Updated Game", response.getBody().getTitle());
@@ -98,7 +98,7 @@ class GameControllerTest {
     void testDeleteGame() {
         doNothing().when(gameService).deleteById(1L);
 
-        ResponseEntity<Void> response = gameController.deleteGenre(1L);
+        ResponseEntity<Void> response = gameController.deleteGame(1L);
 
         assertEquals(204, response.getStatusCodeValue());
         verify(gameService).deleteById(1L);
