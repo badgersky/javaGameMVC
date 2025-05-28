@@ -24,14 +24,14 @@ public class GameController {
     @GetMapping
     @Operation(summary = "Get all game")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Game>> getAllGenres() {
+    public ResponseEntity<List<Game>> getAllGames() {
         return ResponseEntity.ok(gameService.findAll());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get game by ID")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Game> getGenreById(@PathVariable Long id) {
+    public ResponseEntity<Game> getGameById(@PathVariable Long id) {
         return gameService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -47,14 +47,14 @@ public class GameController {
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing game")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Game> updateGenre(@PathVariable Long id, @RequestBody Game updatedGame) {
+    public ResponseEntity<Game> updateGame(@PathVariable Long id, @RequestBody Game updatedGame) {
         return ResponseEntity.ok(gameService.update(id, updatedGame));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete game by ID")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Void> deleteGenre(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteGame(@PathVariable Long id) {
         gameService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

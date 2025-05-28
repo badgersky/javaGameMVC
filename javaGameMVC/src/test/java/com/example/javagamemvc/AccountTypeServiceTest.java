@@ -4,7 +4,6 @@ import com.example.javagamemvc.entity.AccountType;
 import com.example.javagamemvc.repository.AccountTypeRepository;
 import com.example.javagamemvc.service.AccountTypeService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,7 +26,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should return all account types")
     void testFindAll() {
         AccountType type1 = new AccountType();
         type1.setName("Admin");
@@ -44,7 +42,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty list when no account types")
     void testFindAllEmpty() {
         when(accountTypeRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -55,7 +52,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should save an account type")
     void testSave() {
         AccountType accountType = new AccountType();
         accountType.setName("Moderator");
@@ -69,7 +65,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should update existing account type")
     void testUpdate() {
         Long id = 1L;
         AccountType existing = new AccountType();
@@ -89,7 +84,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw exception when updating non-existing account type")
     void testUpdateNotFound() {
         Long id = 2L;
         AccountType updated = new AccountType();
@@ -106,7 +100,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should delete account type by ID")
     void testDeleteById() {
         Long id = 3L;
 
@@ -118,7 +111,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should find account type by ID")
     void testFindById() {
         Long id = 4L;
         AccountType accountType = new AccountType();
@@ -134,7 +126,6 @@ class AccountTypeServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty when account type not found by ID")
     void testFindByIdNotFound() {
         Long id = 5L;
 

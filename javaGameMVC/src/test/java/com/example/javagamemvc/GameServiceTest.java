@@ -4,7 +4,6 @@ import com.example.javagamemvc.entity.Game;
 import com.example.javagamemvc.repository.GameRepository;
 import com.example.javagamemvc.service.GameService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -28,7 +27,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should return all games")
     void testFindAll() {
         Game game1 = new Game();
         game1.setTitle("Game One");
@@ -45,7 +43,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty list when no games")
     void testFindAllEmpty() {
         when(gameRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -56,7 +53,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should save a new game")
     void testSave() {
         Game game = new Game();
         game.setTitle("New Game");
@@ -70,7 +66,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should update existing game")
     void testUpdate() {
         Long id = 1L;
         Game existingGame = new Game();
@@ -100,7 +95,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw exception when updating non-existing game")
     void testUpdateNotFound() {
         Long id = 2L;
         Game updatedGame = new Game();
@@ -116,7 +110,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should delete game by ID")
     void testDeleteById() {
         Long id = 3L;
 
@@ -128,7 +121,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should find game by ID")
     void testFindById() {
         Long id = 4L;
         Game game = new Game();
@@ -144,7 +136,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty when game not found by ID")
     void testFindByIdNotFound() {
         Long id = 5L;
 
@@ -157,7 +148,6 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Should find games by studio ID")
     void testFindGamesByStudioId() {
         Long studioId = 1L;
         Game game1 = new Game();
