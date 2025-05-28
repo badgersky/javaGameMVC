@@ -35,7 +35,11 @@ public class Game {
     )
     private Set<Genre> genres = new HashSet<>();
 
-    @ManyToMany(mappedBy = "games")
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "studio_game",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "studio_id")
+    )
     private Set<Studio> studios = new HashSet<>();
 }

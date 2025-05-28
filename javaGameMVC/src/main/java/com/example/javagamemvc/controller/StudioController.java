@@ -45,7 +45,7 @@ public class StudioController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update and existing studio by ID")
+    @Operation(summary = "Update an existing studio by ID")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Studio> updateStudio(@PathVariable Long id, @RequestBody Studio updatedStudio) {
         return ResponseEntity.ok(studioService.update(id, updatedStudio));

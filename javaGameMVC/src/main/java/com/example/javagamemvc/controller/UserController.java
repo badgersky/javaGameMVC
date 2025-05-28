@@ -79,7 +79,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @PutMapping("/unlike/{gameId}")
+    @PostMapping("/unlike/{gameId}")
     @Operation(summary = "Dislike a game by the logged-in user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Users> unlikeGame(@PathVariable Long gameId) {
