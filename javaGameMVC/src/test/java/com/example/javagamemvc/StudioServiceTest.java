@@ -4,7 +4,6 @@ import com.example.javagamemvc.entity.Studio;
 import com.example.javagamemvc.repository.StudioRepository;
 import com.example.javagamemvc.service.StudioService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,7 +26,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should return all studios")
     void testFindAll() {
         Studio studio1 = new Studio();
         studio1.setName("Studio One");
@@ -44,7 +42,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty studio list")
     void testFindAllEmpty() {
         when(studioRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -55,7 +52,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should save a new studio")
     void testSaveStudio() {
         Studio studio = new Studio();
         studio.setName("New Studio");
@@ -69,7 +65,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should update existing studio")
     void testUpdateStudio() {
         Long id = 1L;
         Studio existingStudio = new Studio();
@@ -89,7 +84,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw exception when updating non-existing studio")
     void testUpdateStudioNotFound() {
         Long id = 2L;
         Studio updatedStudio = new Studio();
@@ -106,7 +100,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should delete studio by ID")
     void testDeleteById() {
         Long id = 3L;
 
@@ -118,7 +111,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should return studio by ID")
     void testFindById() {
         Long id = 4L;
         Studio studio = new Studio();
@@ -134,7 +126,6 @@ class StudioServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty Optional when studio not found")
     void testFindByIdNotFound() {
         Long id = 5L;
 

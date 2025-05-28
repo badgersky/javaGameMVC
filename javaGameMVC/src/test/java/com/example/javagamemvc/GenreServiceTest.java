@@ -4,7 +4,6 @@ import com.example.javagamemvc.entity.Genre;
 import com.example.javagamemvc.repository.GenreRepository;
 import com.example.javagamemvc.service.GenreService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,7 +26,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should return all genres")
     void testFindAll() {
         Genre genre1 = new Genre();
         genre1.setName("Action");
@@ -44,7 +42,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty genre list")
     void testFindAllEmpty() {
         when(genreRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -55,7 +52,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should save a new genre")
     void testSaveGenre() {
         Genre genre = new Genre();
         genre.setName("RPG");
@@ -69,7 +65,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should update existing genre")
     void testUpdateGenre() {
         Long id = 1L;
         Genre existingGenre = new Genre();
@@ -89,7 +84,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw exception when updating non-existing genre")
     void testUpdateGenreNotFound() {
         Long id = 2L;
         Genre updatedGenre = new Genre();
@@ -106,7 +100,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should delete genre by ID")
     void testDeleteById() {
         Long id = 3L;
 
@@ -118,7 +111,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should return genre by ID")
     void testFindById() {
         Long id = 4L;
         Genre genre = new Genre();
@@ -134,7 +126,6 @@ class GenreServiceTest {
     }
 
     @Test
-    @DisplayName("Should return empty Optional when genre not found")
     void testFindByIdNotFound() {
         Long id = 5L;
 

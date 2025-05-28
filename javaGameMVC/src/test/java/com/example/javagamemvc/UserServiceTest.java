@@ -6,7 +6,6 @@ import com.example.javagamemvc.repository.GameRepository;
 import com.example.javagamemvc.repository.UserRepository;
 import com.example.javagamemvc.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -28,7 +27,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should return all users")
     void testFindAll() {
         Users user1 = new Users();
         user1.setUsername("user1");
@@ -45,7 +43,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should find user by ID")
     void testFindById() {
         Users user = new Users();
         user.setId(1L);
@@ -59,7 +56,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should save new user")
     void testSave() {
         Users user = new Users();
         user.setUsername("newuser");
@@ -72,7 +68,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should update existing user")
     void testUpdate() {
         Users existing = new Users();
         existing.setId(1L);
@@ -95,7 +90,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw when updating non-existing user")
     void testUpdateUserNotFound() {
         when(userRepository.findById(99L)).thenReturn(Optional.empty());
 
@@ -106,7 +100,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should delete user by ID")
     void testDeleteById() {
         doNothing().when(userRepository).deleteById(1L);
 
@@ -116,7 +109,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should like a game")
     void testLikeGame() {
         Users user = new Users();
         user.setId(1L);
@@ -139,7 +131,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should unlike a game")
     void testUnlikeGame() {
         Game game = new Game();
         game.setId(2L);
@@ -164,7 +155,6 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should find user by username")
     void testFindByUsername() {
         Users user = new Users();
         user.setUsername("admin");
