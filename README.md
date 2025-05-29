@@ -95,3 +95,9 @@ jakiej klasy UserDetail oraz jakiego menadżera logowania ma użyć aplikacja. W
 dostępu użytkowników do endpointów, formularza logowania i adresu wylogowania.
 
 ![security config](./images/security3.png)
+
+Większą kontrolę nad typ jacy użytkownicy mają dostęp do konkretnych endpointów można osiągnąć stosując adnotacje
+@PreAuthorize, w której określa się jaką rolę ma mieć użytkownik mający dostęp, lub czy wystarczy, że będzie zalogowany.
+Przykłąd PreAuthorize w GameController:
+
+![@preauthorize w game controller](./images/security4.png)
