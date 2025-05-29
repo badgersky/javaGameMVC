@@ -22,7 +22,7 @@ public class GameController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all game")
+    @Operation(summary = "Get all games")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<Game>> getAllGames() {
         return ResponseEntity.ok(gameService.findAll());

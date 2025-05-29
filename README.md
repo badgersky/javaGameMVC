@@ -53,3 +53,45 @@ Przykład GameService:
 
 #### 2.4 Kontrolery
 
+Kontrolery są klasami obsługującmi w Spring Boot żądania HTTP, mapują żądania do konkretnych metod w serwisach oraz 
+łączą frontend a backendem aplikacji.
+Przykład GameController:
+
+![game controller](./images/game_controller.png)
+
+### Interfejs
+
+Do stworzenia interfejsu użytkownika posłużoną się narzędziem swagger. Interfejs swgger pozwala na dostęp do wszystkich
+endpointów i korzystanie z API. Aby z niego skorzystać dodano odpowiednie zależności do projektu, następnie używając 
+adnotacji @Tag i @Operation można dodać opisy endpointów widoczne na interfejsie.
+Przykład GameController:
+
+![game controller](./images/interface1.png)
+
+GameController w swagerze:
+
+![game controller swagger](./images/interface2.png)
+
+Wynik żądania pobrania gier po id typu gry w swagerze:
+
+![game controller swagger output](./images/interface3.png)
+
+### Security
+
+Do logowania i sprawdzania uprawnień użytkowników wykorzystano Spring Security, które należało dodać do zależności.
+Proces dodawania autentykacji do aplikacji:
+Utworzenie klasy CustomUserDetails - klasy, której spring securiy używa do przechowywania informacji o użytkowniku. 
+Klasa zawiera też metodę przypisującą użytkownikowi rolę na podstawie pola w tabeli AccountType. Dostarcza też metody 
+zwracające hasło i username użytkownika.
+
+![custom user details](./images/security1.png)
+
+Utworzenie klasy CustomUserDetailsService - klasy, która szuka użytkownika w bazie danych.
+
+![custom user details service](./images/security2.png)
+
+Utworzenie klasy SecurityConfig - ustawia się w niej z jakiej funkcji szyfrującej hasło ma korzystać aplikacja, 
+jakiej klasy UserDetail oraz jakiego menadżera logowania ma użyć aplikacja. W klasie ustawia się też szczegóły dotyczące
+dostępu użytkowników do endpointów, formularza logowania i adresu wylogowania.
+
+![security config](./images/security3.png)
