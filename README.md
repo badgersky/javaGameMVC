@@ -101,3 +101,10 @@ Większą kontrolę nad typ jacy użytkownicy mają dostęp do konkretnych endpo
 Przykłąd PreAuthorize w GameController:
 
 ![@preauthorize w game controller](./images/security4.png)
+
+### Tests
+
+Napisano testy jednostkowe i integracyjne pokrywające 90% aplikacji.
+Raport pokrycia testów:
+
+![raport pokrycia testów](./images/testy.png)
