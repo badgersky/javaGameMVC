@@ -79,7 +79,7 @@ Wynik żądania pobrania gier po id typu gry w swagerze:
 ### Security
 
 Do logowania i sprawdzania uprawnień użytkowników wykorzystano Spring Security, które należało dodać do zależności.
-Proces dodawania autentykacji do aplikacji:
+Proces dodawania autentykacji do aplikacji:  
 Utworzenie klasy CustomUserDetails - klasy, której spring securiy używa do przechowywania informacji o użytkowniku. 
 Klasa zawiera też metodę przypisującą użytkownikowi rolę na podstawie pola w tabeli AccountType. Dostarcza też metody 
 zwracające hasło i username użytkownika.
@@ -104,7 +104,7 @@ Przykłąd PreAuthorize w GameController:
 
 ### Tests
 
-Napisano testy jednostkowe i integracyjne pokrywające 90% aplikacji.
+Napisano testy jednostkowe i integracyjne pokrywające 90% aplikacji.  
 Raport pokrycia testów:
 
 ![raport pokrycia testów](./images/testy.png)
