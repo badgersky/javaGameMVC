@@ -73,7 +73,7 @@ class GameControllerTest {
 
         when(gameService.save(ArgumentMatchers.any(Game.class))).thenReturn(inputGame);
 
-        ResponseEntity<Game> response = gameController.createGenre(inputGame);
+        ResponseEntity<Game> response = gameController.createGame(inputGame);
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("New Game", response.getBody().getTitle());
