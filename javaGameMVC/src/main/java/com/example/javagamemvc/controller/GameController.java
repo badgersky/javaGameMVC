@@ -40,7 +40,7 @@ public class GameController {
     @PostMapping
     @Operation(summary = "Create new game")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Game> createGenre(@RequestBody Game game) {
+    public ResponseEntity<Game> createGame(@RequestBody Game game) {
         return ResponseEntity.ok(gameService.save(game));
     }
 
